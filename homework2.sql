@@ -136,11 +136,17 @@ VALUES
 (4, 'Nasi Rendang Daging', 40000, 'Nasi padang dengan rendang daging yang lembut.'),
 (4, 'Nasi Tunjang', 45000, 'Nasi padang dengan tunjang dan kuah yang sedap.'),
 (4, 'Nasi Kikil', 42000, 'Nasi padang dengan kikil yang mantap.'),
-(5, 'Sirloin Crispy Steak', 48000, 'Sirlion .'Crispy on the outside, juicy on the inside'),
+(5, 'Sirloin Crispy Steak', 48000, 'Crispy on the outside, juicy on the inside'),
 (5, 'BBQ Chopped Steak', 35000, 'Smokey, savory beef mixed with a sweet and zesty BBQ glaze.'),
 (5, 'Mozarella Steak', 45000, 'Tender, juicy meat beneath a soft, stretchy, melted cheese layer.'),
-(6, 'Wagyu Cheese Burger', 60000, 'Juicy beef patty with double cheese.'),
+(6, 'Soft Crab Devilled', 100000, 'Sweet seafood mixed with tangy mustard, hot sauce, and spices.'),
+(6, 'Mutton Rolls', 70000, 'Savory lamb or goat meat cooked with warm spices, onions, and black pepper.'),
+(6, 'Smoked Salmon', 110000, 'Buttery and savory with a distinct, smoky aroma.');
 
-
-
+SELECT t1.name, t2.item_name, avg(t3.rating) as avg_rating
+FROM restaurant as t1
+JOIN menu as t2 ON t1.id = t2.restaurant_id
+JOIN review as t3 ON t1.id = t3.restaurant_id
+GROUP BY t1.name, t2.item_name
+ORDER BY t1.name;
 
