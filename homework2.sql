@@ -143,6 +143,8 @@ VALUES
 (6, 'Mutton Rolls', 70000, 'Savory lamb or goat meat cooked with warm spices, onions, and black pepper.'),
 (6, 'Smoked Salmon', 110000, 'Buttery and savory with a distinct, smoky aroma.');
 
+select * from menu;
+
 SELECT t1.name, t2.item_name, avg(t3.rating) as avg_rating
 FROM restaurant as t1
 JOIN menu as t2 ON t1.id = t2.restaurant_id
