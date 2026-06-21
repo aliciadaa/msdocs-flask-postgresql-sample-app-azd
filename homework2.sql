@@ -56,5 +56,40 @@ FROM restaurant as t1 JOIN review as t2
 ON t1.id = t2.restaurant_id ORDER BY t2.rating DESC;
 
 -- UPDATE
+UPDATE restaurant SET description = 'Hidup aja yang sederhana, nasi padang jangan.'
+WHERE id = 4 and name = 'Nasi Padang Gak Sederhana';
 
+select name, description from restaurant;
 
+UPDATE review SET rating = 4, review_text = 'For the cheap price, its a good one'
+WHERE user_name = 'Venka' and restaurant_id = 1;
+
+SELECT user_name, rating, review_text from review;
+
+-- DELETE one review based on id.
+DELETE FROM review WHERE id = '2';
+select * from review;
+
+-- DELETE a restaurant and ensure its associated reviews are also deleted
+ALTER TABLE review DROP CONSTRAINT review_restaurant_id_fkey;
+ALTER TABLE review ADD CONSTRAINT review_restaurant_fkey
+FOREIGN KEY (restaurant_id) REFERENCES restaurant(id) ON DELETE CASCADE;
+
+DELETE FROM restaurant WHERE id = '5';
+
+SELECT t1.id, t1.name, t2.user_name, t2.rating, t2.review_text
+FROM restaurant as t1 JOIN review as t2
+ON t1.id = t2.restaurant_id;
+
+-- ADDITIONAL QUERIES
+SELECT t1.name, avg(t2.rating) as avg_rating
+FROM restaurant as t1 JOIN review as t2
+ON t1.id = t2.restaurant_id
+GROUP BY t1.name
+ORDER BY avg_rating DESC 
+LIMIT 1;
+
+SELECT t1.name, count(t2.id) as total_review
+FROM restaurant as t1 JOIN review as t2
+ON t1.id = t2.restaurant_id
+GROUP BY t1.name;
